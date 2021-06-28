@@ -1,11 +1,28 @@
-import logo from "./logo.svg";
+import { useState } from "react";
+import ReactAutocomplete from "react-autocomplete";
 import "./App.css";
 
 function App() {
+  const [value, setValue] = useState();
+
   return (
-    <div className="App">
-      <p>Hello world</p>
-    </div>
+    <ReactAutocomplete
+      items={[
+        { id: "foo", label: "foo" },
+        { id: "bar", label: "bar" },
+        { id: "baz", label: "baz" },
+      ]}
+      shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+      getItemValue={item => item.label}
+      renderItem={(item, highlighted) => (
+        <div key={item.id} style={{ backgroundColor: highlighted ? "#eee" : "transparent" }}>
+          {item.label}
+        </div>
+      )}
+      value={value}
+      onChange={e => setValue(e.target.value)}
+      onSelect={value => setValue({ value })}
+    />
   );
 }
 
