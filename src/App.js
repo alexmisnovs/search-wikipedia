@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState  } from "react";
 import { useSearch, useDebounce } from "./hooks";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -17,9 +17,12 @@ function App() {
       disableClearable
       options={articles.map((article) => article.label)}
       onInputChange={(event, newInputValue) => {
+        console.log(newInputValue)
         setValue(newInputValue);
       }}
-      onChange={value => setValue({ value })}
+      onChange={value => {
+        console.log(value)
+        setValue({ value })}}
       renderInput={(params) => (
         <TextField
           {...params}

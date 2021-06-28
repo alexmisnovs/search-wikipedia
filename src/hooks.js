@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 
 export const useSearch = query => {
@@ -70,3 +70,5 @@ export const useDebounce = (value, delay = 500) => {
 
   return debouncedValue;
 };
+
+
