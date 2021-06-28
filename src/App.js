@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSearch, useDebounce } from "./hooks";
-import ReactAutocomplete from "react-autocomplete";
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import "./App.css";
-
-import Input from "./components/Input";
 
 function App() {
   const [value, setValue] = useState("");
@@ -11,29 +10,27 @@ function App() {
   const { articles, status, error } = useSearch(useDebounce(value));
 
   return (
-    <ReactAutocomplete
-      items={articles}
-      renderInput={Input}
-      inputProps={{ placeholder: "Please type your search" }}
-      shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
-      getItemValue={item => item.label}
-      // renderMenu={(children, value, style) => {
-      //   <div style={{ ...style }} className="input-suggestion">
-      //     {children}
-      //     <a href={`/search?query=${value}`} className="search-link">
-      //       see all results
-      //     </a>
-      //   </div>;
-      // }}
-      renderItem={(item, highlighted) => (
-        <div key={item.id} style={{ backgroundColor: highlighted ? "#eee" : "transparent" }}>
-          {item.label}
-        </div>
+    <>
+      <Autocomplete
+      freeSolo
+      id="free-solo-2-demo"
+      disableClearable
+      options={articles.map((article) => article.label)}
+      onInputChange={(event, newInputValue) => {
+        setValue(newInputValue);
+      }}
+      onChange={value => setValue({ value })}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Search input"
+          margin="normal"
+          variant="outlined"
+          InputProps={{ ...params.InputProps, type: 'search' }}
+        />
       )}
-      value={value}
-      onChange={e => setValue(e.target.value)}
-      onSelect={value => setValue({ value })}
     />
+    </>
   );
 }
 
