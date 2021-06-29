@@ -17,14 +17,14 @@ function App() {
       inputProps={{ placeholder: "Please type your search" }}
       shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
       getItemValue={item => item.label}
-      // renderMenu={(children, value, style) => {
-      //   <div style={{ ...style }} className="input-suggestion">
-      //     {children}
-      //     <a href={`/search?query=${value}`} className="search-link">
-      //       see all results
-      //     </a>
-      //   </div>;
-      // }}
+      renderMenu={(children, value, style) => {
+        <div style={{ ...style }} className="input-suggestion">
+          {children}
+          <a href={`/search?query=${value}`} className="search-link">
+            see all results
+          </a>
+        </div>;
+      }}
       renderItem={(item, highlighted) => (
         <div key={item.id} style={{ backgroundColor: highlighted ? "#eee" : "transparent" }}>
           {item.label}
