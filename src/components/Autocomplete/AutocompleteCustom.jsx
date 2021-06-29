@@ -15,7 +15,10 @@ const AutocompleteCustome = ({ articles, searchValue, onSearchChange }) => {
         //   console.log(newInputValue);
         //   setValue(newInputValue);
         // }}
-        onChange={onSearchChange}
+        onChange={e => {
+          // need to fire redirect to the search page later
+          console.log(e);
+        }}
         value={searchValue}
         renderInput={params => (
           <TextField
