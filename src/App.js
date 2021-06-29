@@ -1,39 +1,22 @@
-import { useSearch, useDebounce, useSearchForm } from "./hooks";
 import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import CustomContainer from "./components/Container/CustomContainer";
+import AutocompleteCustom from "./components/Autocomplete/AutocompleteCustom";
 import "./App.css";
 
-function App() {
-  const { searchValue, onSearchChange } = useSearchForm();
-  const { articles, status, error } = useSearch(useDebounce(searchValue));
-
+const App = () => {
   return (
     <Container maxWidth="sm">
-      <Autocomplete
-        freeSolo
-        size="small"
-        id="free-solo-2-demo"
-        disableClearable
-        options={articles.map(article => article.label)}
-        onInputChange={onSearchChange}
-        // onInputChange={(event, newInputValue) => {
-        //   console.log(newInputValue);
-        //   setValue(newInputValue);
-        // }}
-        onChange={onSearchChange}
-        renderInput={params => (
-          <TextField
-            {...params}
-            label="Search input"
-            margin="normal"
-            variant="outlined"
-            InputProps={{ ...params.InputProps, type: "search" }}
+      <CustomContainer>
+        {({ searchValue, onSearchChange, articles }) => (
+          <AutocompleteCustom
+            articles={articles}
+            onSearchChange={onSearchChange}
+            searchValue={searchValue}
           />
         )}
-      />
+      </CustomContainer>
     </Container>
   );
-}
+};
 
 export default App;
